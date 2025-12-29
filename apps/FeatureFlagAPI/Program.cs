@@ -12,6 +12,8 @@ builder.Configuration
 // Configure AWS options from appsettings
 var awsOptions = builder.Configuration.GetAWSOptions();
 
+var reloadAfter = TimeSpan.FromSeconds(int.Parse(builder.Configuration["FeatureFlags:PollIntervalSeconds"] ?? "60"));
+
 // Configure AWS AppConfig
 builder.Configuration.AddAppConfig(
     builder.Configuration["AppConfig:ApplicationId"] ?? string.Empty,
@@ -19,7 +21,14 @@ builder.Configuration.AddAppConfig(
     builder.Configuration["AppConfig:ConfigurationProfileId"] ?? string.Empty,
     awsOptions,
     true,
-    TimeSpan.FromSeconds(int.Parse(builder.Configuration["FeatureFlags:PollIntervalSeconds"] ?? "60")));
+    reloadAfter);
+
+// Configure AWS Systems Manager Parameter Store
+builder.Configuration.AddSystemsManager(
+    "/poc/FeatureFlag/",
+    awsOptions,
+    true,
+    reloadAfter);
 
 // Add AWS services
 builder.Services.AddDefaultAWSOptions(awsOptions);
