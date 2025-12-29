@@ -1,6 +1,7 @@
 import { Route } from '@angular/router';
 import { SignIn } from '../sign-in/sign-in';
 import { Dashboard } from '../dashboard/dashboard';
+import { NotFound } from '../not-found/not-found';
 import { featureFlagGuard } from '../feature-flag.guard';
 
 export const appRoutes: Route[] = [
@@ -12,5 +13,5 @@ export const appRoutes: Route[] = [
   },
   { path: 'dashboard', component: Dashboard },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: '**', component: SignIn }
+  { path: '**', component: NotFound }
 ];

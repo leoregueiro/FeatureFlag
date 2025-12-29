@@ -1,5 +1,4 @@
 using Microsoft.FeatureManagement;
-using FeatureFlagAPI;
 using Amazon.SimpleSystemsManagement;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,13 +12,14 @@ builder.Configuration
 // Configure AWS options from appsettings
 var awsOptions = builder.Configuration.GetAWSOptions();
 
+// Configure AWS AppConfig
 builder.Configuration.AddAppConfig(
     builder.Configuration["AppConfig:ApplicationId"] ?? string.Empty,
     builder.Configuration["AppConfig:EnvironmentId"] ?? string.Empty,
     builder.Configuration["AppConfig:ConfigurationProfileId"] ?? string.Empty,
     awsOptions,
     true,
-    TimeSpan.FromSeconds(int.Parse(builder.Configuration["AppConfig:PollIntervalSeconds"] ?? "60")));
+    TimeSpan.FromSeconds(int.Parse(builder.Configuration["FeatureFlags:PollIntervalSeconds"] ?? "60")));
 
 // Add AWS services
 builder.Services.AddDefaultAWSOptions(awsOptions);

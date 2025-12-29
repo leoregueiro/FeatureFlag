@@ -22,11 +22,16 @@
       <footer>
         <button (click)="refreshFlags()" [attr.aria-busy]="busy$()">Refresh Feature Flags</button>
       <hr/>
-        <p>To enable or disable feature flags, go to the <a href="#">Feature Flag AWS AppConfig page</a></p>
+        <p>To enable or disable feature flags, go to the <a target="_blank" href="https://us-east-1.console.aws.amazon.com/systems-manager/appconfig/applications/cuw93oq/?region=us-east-1">Feature Flag AWS AppConfig page <span>&nearr;</span></a></p>
       </footer>
   </article>
   <article>
     <h3>Feature Flag Directive</h3>
-    <p *appFeatureFlag="'NewDashboard'">This paragraph is only visible if the 'NewDashboard' feature flag is enabled.</p>
-    <p *appFeatureFlag="'EmailVerification'">This paragraph is only visible if the 'EmailVerification' feature flag is enabled.</p>
+    <p *appFeatureFlag="'NewDashboard'">This paragraph is only visible if the <b>'NewDashboard'</b> feature flag is enabled.</p>
+    <p *appFeatureFlag="'EmailVerification'">This paragraph is only visible if the <b>'EmailVerification'</b> feature flag is enabled.</p>
+  </article>
+
+    <article>
+    <h3>Feature Flag Route Guard</h3>
+    <a href="/confirm-code">Navigate to Confirm Code Page</a>
   </article>
