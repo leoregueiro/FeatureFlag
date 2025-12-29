@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+@use "sass:map";
+@use "@picocss/pico/scss/pico" as * with (
+  $theme-color: "indigo",
+  $semantic-root-element: "app-root",
+  $enable-semantic-container: true,
+  $enable-classes: false
+);
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: map.get(map.get($breakpoints, "sm"), "viewport") !important;
+}

@@ -1,0 +1,27 @@
+<main>
+    <h1>Sign in</h1>
+
+    <form>
+        <input
+            type="text"
+            name="login"
+            placeholder="Login"
+            aria-label="Login"
+            autocomplete="username"
+            required
+            ngModel
+        >
+
+        <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            aria-label="Password"
+            autocomplete="current-password"
+            required
+            ngModel
+        >
+
+        <input type="button" value="Login" (click)="onLogin()">
+    </form>
+</main>

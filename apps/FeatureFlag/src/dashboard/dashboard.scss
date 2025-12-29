@@ -1,0 +1,22 @@
+del {
+    text-decoration: none;
+}
+
+/* Styles for the outer <pre> element (the block container) */
+pre {
+  background-color: #333; /* Dark background */
+  color: #fff; /* White text */
+  padding: 16px; /* Spacing inside the block */
+  border-radius: 8px; /* Rounded corners */
+  overflow-x: auto; /* Adds a horizontal scrollbar if needed */
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Styles for the inner <code> element (ensures styles are applied correctly) */
+pre code {
+  /* These styles might be inherited, but it's good practice to ensure */
+  background: none;
+  padding: 0;
+  color: inherit;
+}

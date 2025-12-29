@@ -1,0 +1,32 @@
+<article>
+    <header>
+      <hgroup>
+        <h1>Dashboard</h1>
+      </hgroup>
+       <nav>
+        <ul>
+          <li><a href="/login">Login</a></li>
+          <li><a href="http://localhost:5183/swagger/index.html" target="_blank">FeatureFlagAPI Swagger <span>&nearr;</span></a></li>
+        </ul>
+      </nav>
+    </header>
+
+      <h3>Feature Flags Status</h3>
+      <ul>
+        @for (feature of featureList$ | async | keyvalue; track feature.key) {
+            <li>
+                <strong>{{ feature.key }}</strong>: @if (feature.value) {<ins>Enabled</ins>} @else {<del>Disabled</del>}
+            </li>
+        }
+      </ul>
+      <footer>
+        <button (click)="refreshFlags()" [attr.aria-busy]="busy$()">Refresh Feature Flags</button>
+      <hr/>
+        <p>To enable or disable feature flags, go to the <a href="#">Feature Flag AWS AppConfig page</a></p>
+      </footer>
+  </article>
+  <article>
+    <h3>Feature Flag Directive</h3>
+    <p *appFeatureFlag="'NewDashboard'">This paragraph is only visible if the 'NewDashboard' feature flag is enabled.</p>
+    <p *appFeatureFlag="'EmailVerification'">This paragraph is only visible if the 'EmailVerification' feature flag is enabled.</p>
+  </article>

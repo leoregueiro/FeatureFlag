@@ -19,7 +19,7 @@
             "input": "apps/FeatureFlag/public"
           }
         ],
-        "styles": ["apps/FeatureFlag/src/styles.css"]
+        "styles": ["apps/FeatureFlag/src/styles.scss"]
       },
       "configurations": {
         "production": {
@@ -48,6 +48,9 @@
     "serve": {
       "continuous": true,
       "executor": "@angular/build:dev-server",
+      "options": {
+        "proxyConfig": "apps/FeatureFlag/proxy.conf.json"
+      },
       "configurations": {
         "production": {
           "buildTarget": "FeatureFlag:build:production"

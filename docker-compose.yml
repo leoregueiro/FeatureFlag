@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  # Angular Frontend Application
+  angular-app:
+    build:
+      context: .
+      dockerfile: apps/FeatureFlag/Dockerfile
+      target: development
+    container_name: nx-angular-app
+    ports:
+      - "4200:4200"
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/dist
+    environment:
+      - NODE_ENV=development
+      - API_URL=http://127.0.0.1:5000
+    command: npx nx serve FeatureFlag --host 0.0.0.0
+    depends_on:
+      - dotnet-api
+    networks:
+      - nx-network
+
+  # .NET Web API Application with AWS AppConfig
+  dotnet-api:
+    build:
+      context: .
+      dockerfile: apps/FeatureFlagAPI/Dockerfile
+      target: development
+    container_name: nx-dotnet-api
+    ports:
+      - "5000:5000"
+      - "5001:5001"
+    volumes:
+      - ./apps/FeatureFlagAPI:/app
+      - ~/.aws:/root/.aws:ro  # Mount AWS credentials (read-only)
+      - /app/bin
+      - /app/obj
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://127.0.0.1:5000;https://127.0.0.1:5001
+      - CORS__AllowedOrigins=http://127.0.0.1:4200
+      # AWS AppConfig Settings
+      - AWS_REGION=us-east-1
+      - AWS_PROFILE=default
+      - AppConfig__ApplicationId=cuw93oq
+      - AppConfig__EnvironmentId=29mnww0
+      - AppConfig__ConfigurationProfileId=v78kjzf
+      - AppConfig__PollIntervalSeconds=60
+      # Alternative: Use explicit credentials (not recommended for production)
+      # - AWS_ACCESS_KEY_ID=your-access-key
+      # - AWS_SECRET_ACCESS_KEY=your-secret-key
+    networks:
+      - nx-network
+
+networks:
+  nx-network:
+    driver: bridge
