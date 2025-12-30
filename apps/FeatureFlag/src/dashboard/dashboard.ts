@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FeatureFlagService } from '../feature-flag.service';
 import { FeatureFlagDirective } from '../feature-flag.directive';
+import { delay, map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +14,7 @@ import { FeatureFlagDirective } from '../feature-flag.directive';
 export class Dashboard {
   private featureFlags = inject(FeatureFlagService);
   featureList$ = this.featureFlags.getFlags$();
-  busy$ = this.featureFlags.loading$;
+  isLoading$ = this.featureFlags.isLoading$();
 
   refreshFlags() {
     this.featureFlags.loadFlags();
