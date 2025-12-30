@@ -22,7 +22,9 @@
       <footer>
         <button (click)="refreshFlags()" [attr.aria-busy]="(isLoading$ | async) || false">Refresh Feature Flags</button>
       <hr/>
-        <p>To enable or disable feature flags, go to the <a target="_blank" href="https://us-east-1.console.aws.amazon.com/systems-manager/appconfig/applications/cuw93oq/?region=us-east-1">Feature Flag AWS AppConfig page <span>&nearr;</span></a></p>
+        <p>To enable or disable feature flags in AppConfig/Parameter store, go to the 
+          <a target="_blank" href="https://us-east-1.console.aws.amazon.com/systems-manager/appconfig/applications/cuw93oq/?region=us-east-1">Feature Flag AWS AppConfig page <span>&nearr;</span></a> 
+          | <a target="_blank" href="https://us-east-1.console.aws.amazon.com/systems-manager/parameters/?region=us-east-1&tab=Table#list_parameter_filters=Name:Contains:%2Fpoc%2FFeatureFlag%2F">Feature Flag AWS Parameter Store page <span>&nearr;</span></a></p>
       </footer>
   </article>
   <article>
